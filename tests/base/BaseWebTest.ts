@@ -27,8 +27,8 @@ export const test = base.extend<{}, MyFixtures>({
   testConfig: [async ({}, use) => {
     const config: TestConfig = {
       browserType: (process.env.BROWSER_TYPE as 'chromium' | 'firefox' | 'webkit') || 'chromium',
-      headless: process.env.HEADLESS !== 'false',
-      baseUrl: process.env.BASE_URL || 'http://localhost:8080',
+      headless: false, // process.env.HEADLESS !== 'false',
+      baseUrl: process.env.BASE_URL || 'https://demowebshop.tricentis.com',
       slowMo: process.env.SLOW_MO ? parseInt(process.env.SLOW_MO) : undefined,
     };
     await use(config);

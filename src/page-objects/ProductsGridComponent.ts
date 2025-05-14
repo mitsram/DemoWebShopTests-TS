@@ -15,33 +15,34 @@ export class ProductsGridComponent extends BasePage {
         super(page);
     }
 
+    private getProductItemLocator(productName: string) {
+        return this.page
+            .locator('.product-grid')  // Container scope
+            .locator('.product-item') // Product items
+            .filter({
+                // Exact match on product title element
+                has: this.page.locator('.product-title')
+                    .getByText(productName, { exact: true })
+            });
+    }
+
     public async addProductToCart(productName: string): Promise<void> {
-        const productItem = this.page.locator(
-            ProductsGridSelectors.productItem(productName)
-        );
+        const productItem = this.getProductItemLocator(productName);
 
-        // Scroll to the product item for better visibility
         await productItem.scrollIntoViewIfNeeded();
-
-        // Click the add to cart button within the product item
-        const addButton = productItem.locator(ProductsGridSelectors.addToCartButton);
+        
+        const addButton = productItem.getByRole('button', { name: 'Add to cart', exact: true });
         await addButton.click();
-
-        // Wait for cart update confirmation
         await this.waitForCartUpdate();
     }
 
     public async getProductPrice(productName: string): Promise<string> {
-        const productItem = this.page.locator(
-            ProductsGridSelectors.productItem(productName)
-        );
+        const productItem = this.getProductItemLocator(productName);
         return await productItem.locator('.actual-price').innerText();
     }
 
     public async isProductVisible(productName: string): Promise<boolean> {
-        const productItem = this.page.locator(
-            ProductsGridSelectors.productItem(productName)
-        );
+        const productItem = this.getProductItemLocator(productName);
         return await productItem.isVisible();
     }
 

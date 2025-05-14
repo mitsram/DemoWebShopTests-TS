@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../base/BaseWebTest';
 import { 
     AuthenticationUseCases,
     ShopUseCases,
