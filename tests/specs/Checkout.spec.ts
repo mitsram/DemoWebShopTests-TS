@@ -1,19 +1,17 @@
 import { test, expect } from '@playwright/test';
-import { AuthenticationUseCases } from '../src/use-cases/AuthenticationUseCases';
-import { ShopUseCases } from '../src/use-cases/ShopUseCases';
-import { CartUseCases } from '../src/use-cases/CartUseCases';
-import { CheckoutUseCases } from '../src/use-cases/CheckoutUseCases';
-import { PaymentInformation } from '../src/entities';
-import { paymentInformationBuilder } from './data-builders/PaymentInformationBuilder';
+import { 
+    AuthenticationUseCases,
+    ShopUseCases,
+    CartUseCases,
+    CheckoutUseCases
+} from '../../src/use-cases/Index';
+import { User, PaymentInformation } from '../../src/entities';
+import { paymentInformationBuilder } from '../data/builders/PaymentInformationBuilder';
 
 interface Product {
     name: string;
 }
 
-interface User {
-    username: string;
-    password: string;
-}
 
 test.describe('Checkout Tests', { tag: '@smoke' }, () => {
     let authentication: AuthenticationUseCases;

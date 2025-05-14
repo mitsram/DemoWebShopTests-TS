@@ -1,4 +1,4 @@
-import { PaymentInformation } from '../../src/entities';
+import { PaymentInformation } from '../../../src/entities';
 
 export function paymentInformationBuilder(): PaymentInformation {
     return {
